@@ -1,7 +1,7 @@
 # @Author: Brett Andrews <andrews>
 # @Date:   2018-03-28 17:03:95
 # @Last modified by:   andrews
-# @Last modified time: 2018-03-29 11:03:46
+# @Last modified time: 2018-03-29 16:03:56
 
 """
 Write the spaxel stellar mass of a galaxy to csv.
@@ -21,6 +21,7 @@ import os
 from os.path import join
 
 from astropy.io import fits
+from marvin import config
 from marvin.tools.cube import Cube
 import numpy as np
 import pandas as pd
@@ -63,10 +64,14 @@ for row, inds in enumerate(ind_binid):
     mstar[row][ind_nans] = np.nan
 
 # trim mstar to match size of DAP maps and write to csv
+config.forceDbOff()
 cube = Cube(args.plateifu)
-len_x, __ = cube.data.shape.shape
+len_x = int(cube.header['NAXIS1'])
 
 df = pd.DataFrame(mstar[:len_x, :len_x])
-df.to_csv(join(path_data, 'manga-{}_mstar.csv'.format(args.plateifu)), index=False)
+fout = join(path_data, 'manga-{}_mstar.csv'.format(args.plateifu))
+df.to_csv(fout, index=False)
+
+print('\nWrote:', fout)
 
 fin.close()
