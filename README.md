@@ -7,3 +7,8 @@ Clone this repo:
 ```
 git clone git@github.com:bretthandrews/galaxies-mzr.git
 ```
+
+Install required Python packages:
+```
+pip install -r requirements.txt
+```
