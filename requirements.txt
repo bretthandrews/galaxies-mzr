@@ -2,3 +2,5 @@ sdss-marvin
 matplotlib
 numpy
 pandas
+msgpack
+msgpack-numpy
