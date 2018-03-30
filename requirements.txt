@@ -1,4 +1,4 @@
-marvin
+sdss-marvin
 matplotlib
 numpy
 pandas
